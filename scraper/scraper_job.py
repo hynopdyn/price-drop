@@ -22,10 +22,12 @@ async def main():
     
     if result:
         prev_price = result[0]
-        sql = """UPDATE prices 
-                 SET title=%s, image_url=%s, previous_price=%s, current_price=%s,
-                     lowest_price=LEAST(COALESCE(lowest_price, %s), %s)
-                 WHERE url=%s"""
+        sql = """
+        UPDATE prices 
+        SET title=%s, image_url=%s, previous_price=%s, current_price=%s,
+            lowest_price=LEAST(COALESCE(lowest_price, %s), %s)
+        WHERE url=%s
+        """
         cur.execute(sql, (data['title'], data['image'], prev_price, data['price'], 
                          data['price'], data['price'], url))
     else:

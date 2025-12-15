@@ -7,7 +7,7 @@
 TFT_eSPI tft = TFT_eSPI();
 const char* ssid = "ssid";
 const char* password = "pass";
-const char* api_url = "http://192.168.1.18:5000/prices";
+const char* api_url = "http://IPv4:5000/prices";
 
 bool tft_output(int16_t x, int16_t y, uint16_t w, uint16_t h, uint16_t* bitmap) {
   if (y >= tft.height()) return 0;

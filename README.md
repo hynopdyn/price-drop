@@ -13,7 +13,7 @@ curl -X POST http://localhost:5000/track \
 ```
 making sure that URLs are formatted like: `https://www.amazon.com/gp/aw/d/XXXXXXXXXX/`
 
-Other endpoints
+Other endpoints:
 ```
 /       # For testing
 /dash   # For website
