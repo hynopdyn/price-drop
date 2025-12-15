@@ -1,0 +1,36 @@
+# kubernetes/flaskapp-deployment.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-app
+spec:
+  type: NodePort
+  ports:
+  - port: 5000
+    nodePort: 30080
+  selector:
+    app: flask-app
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-app
+  template:
+    metadata:
+      labels:
+        app: flask-app
+    spec:
+      containers:
+      - name: flask-app
+        image: price-scraper-app:latest
+        imagePullPolicy: Never
+        env:
+        - name: MYSQL_HOST
+          value: mysql
+        - name: KAFKA_BROKER
+          value: kafka:9092

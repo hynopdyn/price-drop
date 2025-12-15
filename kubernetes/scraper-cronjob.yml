@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: price-scraper
+spec:
+  schedule: "0 */6 * * *"  # Every 6 hours
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: scraper
+            image: price-scraper:latest
+            imagePullPolicy: Never
+            env:
+            - name: SCRAPE_URL
+              value: "REPLACE_WITH_URL"
+            - name: MYSQL_HOST
+              value: "YOUR_CLOUD_MYSQL_HOST"
+            - name: MYSQL_PASSWORD
+              value: "rootpass"
+            - name: MYSQL_DB
+              value: "pricedb"
+          restartPolicy: OnFailure

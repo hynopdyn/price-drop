@@ -1,0 +1,24 @@
+# kubernetes/scraper-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scraper
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: scraper
+  template:
+    metadata:
+      labels:
+        app: scraper
+    spec:
+      containers:
+      - name: scraper
+        image: price-scraper-consumer:latest
+        imagePullPolicy: Never
+        env:
+        - name: MYSQL_HOST
+          value: mysql
+        - name: KAFKA_BROKER
+          value: kafka:9092

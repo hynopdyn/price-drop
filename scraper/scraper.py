@@ -1,4 +1,4 @@
-# scraper.py
+# scraper/scraper.py
 from bs4 import BeautifulSoup
 from curl_cffi import requests
 import time
@@ -34,15 +34,15 @@ async def scrape(url: str):
 
     return data
 
+# For standalone testing
 if __name__ == "__main__":
     import asyncio
     import json
 
     start = time.time()
 
-    # url = sys.argv[1]
     url = "https://www.amazon.com/gp/aw/d/B07V8KG7ND/"
     product_data = asyncio.run(scrape(url))
     print(json.dumps(product_data, indent=2))
 
-    print(f"Scrape completed in {product_data["timestamp"] - start:.3f} seconds")
+    print(f"Scrape completed in {product_data['timestamp'] - start:.3f} seconds")
