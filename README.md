@@ -1,7 +1,11 @@
 # price-drop
 Get price drop alerts on your WT32-SC01 desktop display on products you're watching.
 
-## Web app
+## Local deployment
+Hardcoded for local MySQL so this repo only works locally. Must change to environment variables for cloud.
+Also need to change app Dockerfile for requirements.txt to work.
+
+### Web app
 To install web app, `docker build -t price-drop-app:latest app` and `docker-compose up -d`.
 
 To add URLs to track:
@@ -18,17 +22,17 @@ Other endpoints:
 /       # For testing
 /dash   # For website
 /prices # For WT32-SC01
-/remove # Specify URL or "all" will delete URLs
+/remove # Specify URL or "all" will delete URLs (secured like /track)
 ```
 
-## Scraper
+### Scraper
 Then, to use scraper: `docker build -t price-scraper:latest scraper`,
 `minikube image load price-scraper:latest`,
 and run `scraper_orchestrator.py`.
 
-## Desktop display
+### Desktop display
 Finally, on Arduino IDE, install TFT_eSPI, ArduinoJSON, TJpg_Decoder libraries, and load /display.c onto WT32-SC01 using Arduino IDE.
 
-## WIP functionality
+### WIP functionality
 To have the scraper run every 6 hours, `kubectl create job --from=cronjob/price-scraper scraper-1`. (Need to fix kubernetes/scraper-cronjob.yaml)
 `kubectl apply -f kubernetes/scraper-cronjob.yaml`

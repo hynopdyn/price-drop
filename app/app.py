@@ -91,10 +91,6 @@ def add_url():
     print(f"New product tracked: {url}")
     return {'url': url, 'latency': time.time() - start}
 
-if __name__ == '__main__':
-    print("Flask app started on port 5000\n")
-    app.run(host='0.0.0.0', port=5000)
-
 @app.route('/remove', methods=['POST'])
 def rm_url():
     if not check_auth():
@@ -114,3 +110,7 @@ def rm_url():
 
     print(f"Product removed: {url}")
     return {"url": url, 'latency': time.time() - start}
+
+if __name__ == '__main__':
+    print("Flask app started on port 5000\n")
+    app.run(host='0.0.0.0', port=5000)
